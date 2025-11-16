@@ -1,0 +1,243 @@
+/* ======================================================
+   🌐 PHISHING DETECTOR UI — CYBERTECH THEME BY SNEHA
+   ====================================================== */
+
+/* 🟢 1. Global setup */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+:root {
+  --bg1: #060b1b;
+  --bg2: #0e1630;
+  --accent1: #00adb5;
+  --accent2: #6c63ff;
+  --text: #e9eef8;
+  --success: #4dff88;
+  --danger: #ff6b6b;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  min-height: 100vh;
+  background: radial-gradient(circle at 20% 20%, var(--bg1), var(--bg2));
+  color: var(--text);
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* 🌀 Animated background glow */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(108,99,255,0.2) 0%, transparent 70%),
+              radial-gradient(circle, rgba(0,173,181,0.15) 0%, transparent 70%);
+  animation: moveGlow 10s ease-in-out infinite alternate;
+  z-index: -2;
+}
+
+/* 🌀 Optional grid overlay for techy effect */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 20px 20px;
+  animation: moveGrid 20s linear infinite;
+  z-index: -1;
+  pointer-events: none;
+}
+
+@keyframes moveGlow {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 100% 100%; }
+}
+
+@keyframes moveGrid {
+  0% { background-position: 0 0; }
+  100% { background-position: 100% 100%; }
+}
+
+/* 🧩 2. Main container */
+.container {
+  text-align: center;
+  background: rgba(255,255,255,0.03);
+  padding: 50px 30px;
+  border-radius: 20px;
+  box-shadow: 0 0 40px rgba(108,99,255,0.2);
+  width: 90%;
+  max-width: 600px;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.05);
+  transition: transform 0.3s ease;
+}
+
+.container:hover {
+  transform: translateY(-5px);
+}
+
+/* 🔠 3. Title and tagline with cross-browser gradient */
+h1 {
+  font-size: 24px; /* Updated to 24px */
+  font-weight: 700;
+  background: linear-gradient(90deg, var(--accent1), var(--accent2));
+  color: transparent; /* fallback for Firefox */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text; /* standard */
+  text-shadow: 0 0 15px rgba(108,99,255,0.5);
+  animation: titlePulse 3s ease-in-out infinite alternate;
+}
+
+@keyframes titlePulse {
+  0% { text-shadow: 0 0 10px rgba(108,99,255,0.4); }
+  100% { text-shadow: 0 0 25px rgba(108,99,255,1); }
+}
+
+.tagline {
+  margin-top: 10px;
+  font-size: 1rem;
+  letter-spacing: 2px;
+  color: #8aa0ff;
+  text-transform: uppercase;
+  text-shadow: 0 0 15px rgba(108,99,255,0.6);
+  animation: glowFade 2.5s ease-in-out infinite alternate;
+}
+
+@keyframes glowFade {
+  0% { opacity: 0.7; }
+  100% { opacity: 1; }
+}
+
+/* 💬 4. Input + Button section */
+form {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+input#urlInput {
+  flex: 1;
+  min-width: 260px;
+  padding: 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.05);
+  color: var(--text);
+  outline: none;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  box-shadow: inset 0 0 10px rgba(108,99,255,0.3);
+}
+
+input#urlInput::placeholder {
+  color: rgba(255,255,255,0.5);
+  transition: color 0.3s ease;
+}
+
+input#urlInput:focus::placeholder {
+  color: var(--accent1);
+}
+
+input#urlInput:focus {
+  border-color: var(--accent1);
+  box-shadow: 0 0 20px rgba(0,173,181,0.6);
+}
+
+/* 🔘 Animated Button */
+button {
+  position: relative;
+  background: linear-gradient(90deg, var(--accent1), var(--accent2));
+  color: white;
+  font-weight: 600;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(108,99,255,0.3);
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  transform: scale(1.1);
+  background: linear-gradient(90deg, var(--accent2), var(--accent1));
+  box-shadow: 0 0 25px rgba(108,99,255,0.6);
+}
+
+/* Optional glowing pulse behind button */
+button::after {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  width: calc(100% + 10px);
+  height: calc(100% + 10px);
+  border-radius: 12px;
+  background: linear-gradient(90deg, var(--accent1), var(--accent2));
+  filter: blur(10px);
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: -1;
+}
+
+button:hover::after {
+  opacity: 1;
+}
+
+/* 🧠 5. Result box */
+#result {
+  margin-top: 25px;
+  padding: 20px;
+  font-size: 1.2rem;
+  border-radius: 10px;
+  display: inline-block;
+  animation: fadeIn 0.5s ease;
+  border: 1px solid rgba(255,255,255,0.1);
+  transition: all 0.3s ease;
+}
+
+#result:hover {
+  border-color: var(--accent2);
+  box-shadow: 0 0 30px var(--accent2), 0 0 10px var(--accent1);
+}
+
+.result-legit {
+  color: var(--success);
+  text-shadow: 0 0 10px rgba(77,255,136,0.6);
+}
+
+.result-phish {
+  color: var(--danger);
+  text-shadow: 0 0 10px rgba(255,107,107,0.6);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 🧍‍♀️ 6. Footer */
+.footer {
+  text-align: center;
+  color: #98a0b4;
+  font-size: 0.9rem;
+  margin-top: 30px;
+  opacity: 0.8;
+}
