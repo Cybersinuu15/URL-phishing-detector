@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phishing URL Detector</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1><span id="typing"></span></h1>
+    <p class="tagline">Built to use, not to abuse.</p>
+
+    <form id="phishForm">
+      <input type="text" id="urlInput" name="url" placeholder="Enter a URL..." required>
+      <button type="submit">Check</button>
+    </form>
+
+    <div id="result"></div>
+  </div>
+
+  <div class="footer">
+    <p>© 2024 Sneha Shetage | Cybersecurity Project</p>
+  </div>
+
+  <script>
+    // Typing effect for heading
+    const text = "🔎 Phishing URL Detector";
+    let i = 0;
+    function type() {
+      document.getElementById("typing").innerHTML = text.slice(0, i++);
+      if (i <= text.length) setTimeout(type, 100);
+    }
+    type();
+
+    // Result handling
+    document.getElementById("phishForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      const response = await fetch("/predict", { method: "POST", body: formData });
+      const data = await response.json();
+
+      const resultBox = document.getElementById("result");
+      if (data.result === "Phishing") {
+        resultBox.innerHTML = "🚨 This site looks Phishing!";
+        resultBox.className = "result-phish";
+      } else if (data.result === "Legitimate") {
+        resultBox.innerHTML = "✅ This site looks Legitimate!";
+        resultBox.className = "result-legit";
+      } else {
+        resultBox.innerHTML = "⚠️ " + (data.error || "Error occurred!");
+      }
+    });
+  </script>
+</body>
+</html>
